@@ -3,7 +3,6 @@ public abstract class Veiculo implements Alugavel {
     private static int contadorVeiculos = 0;
 
     private int id;
-
     protected String placa;
     protected String modelo;
     protected double valorDiaria;
@@ -26,32 +25,12 @@ public abstract class Veiculo implements Alugavel {
 
     public abstract String obterDescricao();
 
-    @Override
-    public void reservar() {
-        this.disponivel = false;
-        System.out.println("Veículo " + this.modelo + " (Placa: " + this.placa + ") foi reservado.");
-    }
-
-    @Override
-    public void devolver() {
-        this.disponivel = true;
-        System.out.println("Veículo " + this.modelo + " (Placa: " + this.placa + ") foi devolvido.");
-    }
-
     public int getId() {
         return this.id;
     }
 
-    public String getPlaca() {
-        return this.placa;
-    }
-
     public String getModelo() {
         return this.modelo;
-    }
-
-    public double getValorDiaria() {
-        return this.valorDiaria;
     }
 
     public boolean isDisponivel() {

@@ -20,11 +20,12 @@ public class Carro extends Veiculo {
     @Override
     public void reservar() {
         this.disponivel = false;
-        System.out.println("Reserva de Carro: " + this.modelo + " (Placa: " + this.placa
-                + ") reservado com higienização interna agendada.");
+        System.out.println("Carro " + this.modelo + " (Placa: " + this.placa + ") reservado com limpeza agendada.");
     }
 
-    public double getTaxaLimpeza() {
-        return this.taxaLimpeza;
+    @Override
+    public void devolver() {
+        this.disponivel = true;
+        System.out.println("Carro " + this.modelo + " (Placa: " + this.placa + ") devolvido e vistoriado.");
     }
 }

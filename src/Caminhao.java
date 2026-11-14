@@ -14,18 +14,18 @@ public class Caminhao extends Veiculo {
 
     @Override
     public String obterDescricao() {
-        return "[Caminhão] " + this.modelo + " | Placa: " + this.placa + " | Adicional de carga: R$ "
-                + this.adicionalCarga;
+        return "[Caminhão] " + this.modelo + " | Placa: " + this.placa + " | Adicional de carga: R$ " + this.adicionalCarga;
     }
 
     @Override
     public void reservar() {
         this.disponivel = false;
-        System.out.println("Reserva de Caminhão: " + this.modelo + " (Placa: " + this.placa
-                + ") reservado após vistoria da carroceria de carga.");
+        System.out.println("Caminhão " + this.modelo + " (Placa: " + this.placa + ") reservado após vistoria de carga.");
     }
 
-    public double getAdicionalCarga() {
-        return this.adicionalCarga;
+    @Override
+    public void devolver() {
+        this.disponivel = true;
+        System.out.println("Caminhão " + this.modelo + " (Placa: " + this.placa + ") devolvido no pátio de carga.");
     }
 }

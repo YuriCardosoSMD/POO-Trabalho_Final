@@ -14,18 +14,18 @@ public class Moto extends Veiculo {
 
     @Override
     public String obterDescricao() {
-        return "[Moto] " + this.modelo + " | Placa: " + this.placa + " | Desconto econômico: R$ "
-                + this.descontoEconomico;
+        return "[Moto] " + this.modelo + " | Placa: " + this.placa + " | Desconto econômico: R$ " + this.descontoEconomico;
     }
 
     @Override
     public void reservar() {
         this.disponivel = false;
-        System.out.println("Reserva de Moto: " + this.modelo + " (Placa: " + this.placa
-                + ") reservada com capacete extra incluído.");
+        System.out.println("Moto " + this.modelo + " (Placa: " + this.placa + ") reservada com capacete.");
     }
 
-    public double getDescontoEconomico() {
-        return this.descontoEconomico;
+    @Override
+    public void devolver() {
+        this.disponivel = true;
+        System.out.println("Moto " + this.modelo + " (Placa: " + this.placa + ") devolvida com capacete conferido.");
     }
 }
