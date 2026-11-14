@@ -107,11 +107,8 @@ public class Main {
             if (!v.isDisponivel()) {
                 status = "Alugado";
             }
-            System.out.println(
-                    "ID = " + v.getId() +
-                            " | " + v.obterDescricao() +
-                            " | Diária Final = R$ " + v.calcularValorDiaria() +
-                            " | Status = " + status);
+            System.out.println("ID = " + v.getId() + " | " + v.obterDescricao()
+                    + " | Diária Final = R$ " + v.calcularValorDiaria() + " | Status = " + status);
         }
     }
 
@@ -119,23 +116,18 @@ public class Main {
         System.out.print("Digite o ID do veículo: ");
         int idBusca = Integer.parseInt(this.scanner.nextLine());
 
-        ArrayList<Veiculo> frota = this.locadora.getVeiculos();
-        for (int i = 0; i < frota.size(); i++) {
-            Veiculo v = frota.get(i);
-            if (v.getId() == idBusca) {
-                System.out.println(
-                        "ID = " + v.getId() +
-                                " | " + v.obterDescricao() +
-                                " | Diária Final = R$ " + v.calcularValorDiaria());
-                return;
-            }
+        Veiculo v = this.locadora.buscarVeiculoPorId(idBusca);
+        if (v != null) {
+            System.out.println("ID = " + v.getId() + " | " + v.obterDescricao()
+                    + " | Diária Final = R$ " + v.calcularValorDiaria());
+        } else {
+            System.out.println("Veículo não encontrado");
         }
-        System.out.println("Veículo não encontrado");
     }
 
     public void testarInterfaceAlugavel() {
         ArrayList<Veiculo> frota = this.locadora.getVeiculos();
-        System.out.println("\n--- Demonstração da Interface Alugavel e Polimorfismo em reservar() ---");
+        System.out.println("\n--- Teste da Interface Alugavel ---");
         for (int i = 0; i < frota.size(); i++) {
             Alugavel item = frota.get(i);
             item.reservar();
@@ -260,7 +252,7 @@ public class Main {
             this.clientes.remove(codigo);
             System.out.println("Registro removido com sucesso");
         } else {
-            System.out.println("Falha ao remover registro: código inválido");
+            System.out.println("Código inválido");
         }
     }
 
@@ -345,12 +337,9 @@ public class Main {
         }
         for (int i = 0; i < this.locacoes.size(); i++) {
             Locacao loc = this.locacoes.get(i);
-            System.out.println(
-                    "Código = " + i +
-                            " | Cliente = " + loc.getCliente().getNome() +
-                            " | Veículo = " + loc.getVeiculo().getModelo() +
-                            " | Dias = " + loc.getDias() +
-                            " | Total Pago = R$ " + loc.getPagamento().getValorPago());
+            System.out.println("Código = " + i + " | Cliente = " + loc.getCliente().getNome()
+                    + " | Veículo = " + loc.getVeiculo().getModelo() + " | Dias = " + loc.getDias()
+                    + " | Total Pago = R$ " + loc.getPagamento().getValorPago());
         }
     }
 
@@ -381,15 +370,7 @@ public class Main {
         this.listarVeiculos();
         System.out.print("ID do veículo: ");
         int idVeiculo = Integer.parseInt(this.scanner.nextLine());
-
-        Veiculo veiculoEscolhido = null;
-        ArrayList<Veiculo> frota = this.locadora.getVeiculos();
-        for (int i = 0; i < frota.size(); i++) {
-            Veiculo v = frota.get(i);
-            if (v.getId() == idVeiculo) {
-                veiculoEscolhido = v;
-            }
-        }
+        Veiculo veiculoEscolhido = this.locadora.buscarVeiculoPorId(idVeiculo);
 
         if (veiculoEscolhido == null) {
             System.out.println("Veículo não encontrado");
@@ -450,7 +431,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main gui = new Main();
-        gui.menuPrincipal();
+        Main app = new Main();
+        app.menuPrincipal();
     }
 }

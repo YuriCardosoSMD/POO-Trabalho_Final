@@ -1,11 +1,8 @@
 public class Locacao {
 
     private Cliente cliente;
-
     private Veiculo veiculo;
-
     private int dias;
-
     private Pagamento pagamento;
 
     public Locacao(Cliente cliente, Veiculo veiculo, int dias) {
