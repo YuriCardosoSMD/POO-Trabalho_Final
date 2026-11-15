@@ -2,14 +2,14 @@ public abstract class Veiculo implements Alugavel {
 
     private static int contadorVeiculos = 0;
 
-    private int id;
+    private int identificador;
     protected String placa;
     protected String modelo;
     protected double valorDiaria;
     protected boolean disponivel;
 
     public Veiculo(String placa, String modelo, double valorDiaria) {
-        this.id = gerarProximoId();
+        this.identificador = gerarProximoId();
         this.placa = placa;
         this.modelo = modelo;
         this.valorDiaria = valorDiaria;
@@ -25,8 +25,8 @@ public abstract class Veiculo implements Alugavel {
 
     public abstract String obterDescricao();
 
-    public int getId() {
-        return this.id;
+    public int getIdentificador() {
+        return this.identificador;
     }
 
     public String getModelo() {

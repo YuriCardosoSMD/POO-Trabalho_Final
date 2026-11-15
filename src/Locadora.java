@@ -14,11 +14,11 @@ public class Locadora {
         this.veiculos.add(veiculo);
     }
 
-    public Veiculo buscarVeiculoPorId(int id) {
+    public Veiculo buscarVeiculoPorId(int identificador) {
         for (int i = 0; i < this.veiculos.size(); i++) {
-            Veiculo v = this.veiculos.get(i);
-            if (v.getId() == id) {
-                return v;
+            Veiculo veiculo = this.veiculos.get(i);
+            if (veiculo.getIdentificador() == identificador) {
+                return veiculo;
             }
         }
         return null;

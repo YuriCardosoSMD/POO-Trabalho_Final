@@ -28,4 +28,12 @@ public class Carro extends Veiculo {
         this.disponivel = true;
         System.out.println("Carro " + this.modelo + " (Placa: " + this.placa + ") devolvido e vistoriado.");
     }
+
+    public double getTaxaLimpeza() {
+        return this.taxaLimpeza;
+    }
+
+    public void setTaxaLimpeza(double taxaLimpeza) {
+        this.taxaLimpeza = taxaLimpeza;
+    }
 }

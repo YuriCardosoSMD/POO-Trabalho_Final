@@ -28,4 +28,12 @@ public class Caminhao extends Veiculo {
         this.disponivel = true;
         System.out.println("Caminhão " + this.modelo + " (Placa: " + this.placa + ") devolvido no pátio de carga.");
     }
+
+    public double getAdicionalCarga() {
+        return this.adicionalCarga;
+    }
+
+    public void setAdicionalCarga(double adicionalCarga) {
+        this.adicionalCarga = adicionalCarga;
+    }
 }

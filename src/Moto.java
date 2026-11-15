@@ -28,4 +28,12 @@ public class Moto extends Veiculo {
         this.disponivel = true;
         System.out.println("Moto " + this.modelo + " (Placa: " + this.placa + ") devolvida com capacete conferido.");
     }
+
+    public double getDescontoEconomico() {
+        return this.descontoEconomico;
+    }
+
+    public void setDescontoEconomico(double descontoEconomico) {
+        this.descontoEconomico = descontoEconomico;
+    }
 }

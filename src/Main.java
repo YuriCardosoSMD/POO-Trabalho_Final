@@ -102,24 +102,24 @@ public class Main {
             return;
         }
         for (int i = 0; i < frota.size(); i++) {
-            Veiculo v = frota.get(i);
+            Veiculo veiculo = frota.get(i);
             String status = "Disponível";
-            if (!v.isDisponivel()) {
+            if (!veiculo.isDisponivel()) {
                 status = "Alugado";
             }
-            System.out.println("ID = " + v.getId() + " | " + v.obterDescricao()
-                    + " | Diária Final = R$ " + v.calcularValorDiaria() + " | Status = " + status);
+            System.out.println("ID = " + veiculo.getIdentificador() + " | " + veiculo.obterDescricao()
+                    + " | Diária Final = R$ " + veiculo.calcularValorDiaria() + " | Status = " + status);
         }
     }
 
     public void buscarVeiculo() {
         System.out.print("Digite o ID do veículo: ");
-        int idBusca = Integer.parseInt(this.scanner.nextLine());
+        int identificadorBusca = Integer.parseInt(this.scanner.nextLine());
 
-        Veiculo v = this.locadora.buscarVeiculoPorId(idBusca);
-        if (v != null) {
-            System.out.println("ID = " + v.getId() + " | " + v.obterDescricao()
-                    + " | Diária Final = R$ " + v.calcularValorDiaria());
+        Veiculo veiculo = this.locadora.buscarVeiculoPorId(identificadorBusca);
+        if (veiculo != null) {
+            System.out.println("ID = " + veiculo.getIdentificador() + " | " + veiculo.obterDescricao()
+                    + " | Diária Final = R$ " + veiculo.calcularValorDiaria());
         } else {
             System.out.println("Veículo não encontrado");
         }
@@ -129,9 +129,9 @@ public class Main {
         ArrayList<Veiculo> frota = this.locadora.getVeiculos();
         System.out.println("\n--- Teste da Interface Alugavel ---");
         for (int i = 0; i < frota.size(); i++) {
-            Alugavel item = frota.get(i);
-            item.reservar();
-            item.devolver();
+            Alugavel itemAlugavel = frota.get(i);
+            itemAlugavel.reservar();
+            itemAlugavel.devolver();
         }
     }
 
@@ -141,13 +141,13 @@ public class Main {
         System.out.print("Modelo: ");
         String modelo = this.scanner.nextLine();
         System.out.print("Valor da diária base: ");
-        double diaria = Double.parseDouble(this.scanner.nextLine());
+        double valorDiaria = Double.parseDouble(this.scanner.nextLine());
         System.out.print("Taxa de limpeza: ");
         double taxaLimpeza = Double.parseDouble(this.scanner.nextLine());
 
-        Carro novoCarro = new Carro(placa, modelo, diaria, taxaLimpeza);
+        Carro novoCarro = new Carro(placa, modelo, valorDiaria, taxaLimpeza);
         this.locadora.adicionarVeiculo(novoCarro);
-        System.out.println("Carro inserido com sucesso (ID = " + novoCarro.getId() + ")");
+        System.out.println("Carro inserido com sucesso (ID = " + novoCarro.getIdentificador() + ")");
     }
 
     public void inserirMoto() {
@@ -156,13 +156,13 @@ public class Main {
         System.out.print("Modelo: ");
         String modelo = this.scanner.nextLine();
         System.out.print("Valor da diária base: ");
-        double diaria = Double.parseDouble(this.scanner.nextLine());
+        double valorDiaria = Double.parseDouble(this.scanner.nextLine());
         System.out.print("Desconto econômico: ");
-        double desconto = Double.parseDouble(this.scanner.nextLine());
+        double descontoEconomico = Double.parseDouble(this.scanner.nextLine());
 
-        Moto novaMoto = new Moto(placa, modelo, diaria, desconto);
+        Moto novaMoto = new Moto(placa, modelo, valorDiaria, descontoEconomico);
         this.locadora.adicionarVeiculo(novaMoto);
-        System.out.println("Moto inserida com sucesso (ID = " + novaMoto.getId() + ")");
+        System.out.println("Moto inserida com sucesso (ID = " + novaMoto.getIdentificador() + ")");
     }
 
     public void inserirCaminhao() {
@@ -171,13 +171,13 @@ public class Main {
         System.out.print("Modelo: ");
         String modelo = this.scanner.nextLine();
         System.out.print("Valor da diária base: ");
-        double diaria = Double.parseDouble(this.scanner.nextLine());
+        double valorDiaria = Double.parseDouble(this.scanner.nextLine());
         System.out.print("Adicional de carga: ");
-        double adicional = Double.parseDouble(this.scanner.nextLine());
+        double adicionalCarga = Double.parseDouble(this.scanner.nextLine());
 
-        Caminhao novoCaminhao = new Caminhao(placa, modelo, diaria, adicional);
+        Caminhao novoCaminhao = new Caminhao(placa, modelo, valorDiaria, adicionalCarga);
         this.locadora.adicionarVeiculo(novoCaminhao);
-        System.out.println("Caminhão inserido com sucesso (ID = " + novoCaminhao.getId() + ")");
+        System.out.println("Caminhão inserido com sucesso (ID = " + novoCaminhao.getIdentificador() + ")");
     }
 
     public void menuClientes() {
@@ -216,18 +216,20 @@ public class Main {
             return;
         }
         for (int i = 0; i < this.clientes.size(); i++) {
-            Cliente c = this.clientes.get(i);
-            System.out.println("Código = " + i + " | Nome = " + c.getNome() + " | CPF = " + c.getCpf());
+            Cliente cliente = this.clientes.get(i);
+            System.out.println("Código = " + i + " | Nome = " + cliente.getNome() + " | CPF = "
+                    + cliente.getDocumentoCpf());
         }
     }
 
     public void buscarCliente() {
         System.out.print("Digite o código do cliente: ");
-        int codigo = Integer.parseInt(this.scanner.nextLine());
+        int codigoCliente = Integer.parseInt(this.scanner.nextLine());
 
-        if (codigo >= 0 && codigo < this.clientes.size()) {
-            Cliente c = this.clientes.get(codigo);
-            System.out.println("Código = " + codigo + " | Nome = " + c.getNome() + " | CPF = " + c.getCpf());
+        if (codigoCliente >= 0 && codigoCliente < this.clientes.size()) {
+            Cliente cliente = this.clientes.get(codigoCliente);
+            System.out.println("Código = " + codigoCliente + " | Nome = " + cliente.getNome()
+                    + " | CPF = " + cliente.getDocumentoCpf());
         } else {
             System.out.println("Cliente não encontrado");
         }
@@ -237,9 +239,9 @@ public class Main {
         System.out.print("Nome: ");
         String nome = this.scanner.nextLine();
         System.out.print("CPF: ");
-        String cpf = this.scanner.nextLine();
+        String documentoCpf = this.scanner.nextLine();
 
-        Cliente novoCliente = new Cliente(nome, cpf);
+        Cliente novoCliente = new Cliente(nome, documentoCpf);
         this.clientes.add(novoCliente);
         System.out.println("Registro inserido com sucesso");
     }
@@ -286,8 +288,8 @@ public class Main {
             return;
         }
         for (int i = 0; i < this.funcionarios.size(); i++) {
-            Funcionario f = this.funcionarios.get(i);
-            System.out.println("Código = " + i + " | Nome = " + f.getNome());
+            Funcionario funcionario = this.funcionarios.get(i);
+            System.out.println("Código = " + i + " | Nome = " + funcionario.getNome());
         }
     }
 
@@ -336,10 +338,10 @@ public class Main {
             return;
         }
         for (int i = 0; i < this.locacoes.size(); i++) {
-            Locacao loc = this.locacoes.get(i);
-            System.out.println("Código = " + i + " | Cliente = " + loc.getCliente().getNome()
-                    + " | Veículo = " + loc.getVeiculo().getModelo() + " | Dias = " + loc.getDias()
-                    + " | Total Pago = R$ " + loc.getPagamento().getValorPago());
+            Locacao locacao = this.locacoes.get(i);
+            System.out.println("Código = " + i + " | Cliente = " + locacao.getCliente().getNome()
+                    + " | Veículo = " + locacao.getVeiculo().getModelo() + " | Dias = " + locacao.getDias()
+                    + " | Total Pago = R$ " + locacao.getPagamento().getValorPago());
         }
     }
 
@@ -351,26 +353,26 @@ public class Main {
 
         this.listarClientes();
         System.out.print("Código do cliente: ");
-        int codCliente = Integer.parseInt(this.scanner.nextLine());
-        if (codCliente < 0 || codCliente >= this.clientes.size()) {
+        int codigoCliente = Integer.parseInt(this.scanner.nextLine());
+        if (codigoCliente < 0 || codigoCliente >= this.clientes.size()) {
             System.out.println("Cliente inválido");
             return;
         }
-        Cliente clienteEscolhido = this.clientes.get(codCliente);
+        Cliente clienteEscolhido = this.clientes.get(codigoCliente);
 
         this.listarFuncionarios();
         System.out.print("Código do funcionário responsável: ");
-        int codFunc = Integer.parseInt(this.scanner.nextLine());
-        if (codFunc < 0 || codFunc >= this.funcionarios.size()) {
+        int codigoFuncionario = Integer.parseInt(this.scanner.nextLine());
+        if (codigoFuncionario < 0 || codigoFuncionario >= this.funcionarios.size()) {
             System.out.println("Funcionário inválido");
             return;
         }
-        Funcionario funcionarioEscolhido = this.funcionarios.get(codFunc);
+        Funcionario funcionarioEscolhido = this.funcionarios.get(codigoFuncionario);
 
         this.listarVeiculos();
         System.out.print("ID do veículo: ");
-        int idVeiculo = Integer.parseInt(this.scanner.nextLine());
-        Veiculo veiculoEscolhido = this.locadora.buscarVeiculoPorId(idVeiculo);
+        int identificadorVeiculo = Integer.parseInt(this.scanner.nextLine());
+        Veiculo veiculoEscolhido = this.locadora.buscarVeiculoPorId(identificadorVeiculo);
 
         if (veiculoEscolhido == null) {
             System.out.println("Veículo não encontrado");
@@ -398,14 +400,14 @@ public class Main {
         }
         this.listarLocacoes();
         System.out.print("Código da locação: ");
-        int codLocacao = Integer.parseInt(this.scanner.nextLine());
+        int codigoLocacao = Integer.parseInt(this.scanner.nextLine());
 
-        if (codLocacao >= 0 && codLocacao < this.locacoes.size()) {
-            Locacao loc = this.locacoes.get(codLocacao);
+        if (codigoLocacao >= 0 && codigoLocacao < this.locacoes.size()) {
+            Locacao locacao = this.locacoes.get(codigoLocacao);
             System.out.print("Quantidade de dias de atraso: ");
             int diasAtraso = Integer.parseInt(this.scanner.nextLine());
 
-            double multa = loc.calcularMultaAtraso(diasAtraso);
+            double multa = locacao.calcularMultaAtraso(diasAtraso);
             System.out.println("Valor da multa por atraso = R$ " + multa);
         } else {
             System.out.println("Código de locação inválido");
@@ -419,19 +421,19 @@ public class Main {
         }
         this.listarLocacoes();
         System.out.print("Código da locação para encerrar (devolver veículo): ");
-        int codLocacao = Integer.parseInt(this.scanner.nextLine());
+        int codigoLocacao = Integer.parseInt(this.scanner.nextLine());
 
-        if (codLocacao >= 0 && codLocacao < this.locacoes.size()) {
-            Locacao loc = this.locacoes.get(codLocacao);
-            loc.encerrarLocacao();
+        if (codigoLocacao >= 0 && codigoLocacao < this.locacoes.size()) {
+            Locacao locacao = this.locacoes.get(codigoLocacao);
+            locacao.encerrarLocacao();
             System.out.println("Devolução concluída com sucesso");
         } else {
             System.out.println("Código de locação inválido");
         }
     }
 
-    public static void main(String[] args) {
-        Main app = new Main();
-        app.menuPrincipal();
+    public static void main(String[] argumentos) {
+        Main aplicacao = new Main();
+        aplicacao.menuPrincipal();
     }
 }

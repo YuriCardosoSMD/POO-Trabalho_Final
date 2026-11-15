@@ -9,4 +9,12 @@ public class CalculadoraDeMulta {
     public double calcularMulta(int diasAtraso) {
         return diasAtraso * this.valorPorDiaAtraso;
     }
+
+    public double getValorPorDiaAtraso() {
+        return this.valorPorDiaAtraso;
+    }
+
+    public void setValorPorDiaAtraso(double valorPorDiaAtraso) {
+        this.valorPorDiaAtraso = valorPorDiaAtraso;
+    }
 }
